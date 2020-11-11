@@ -15,10 +15,13 @@ D3D11Renderer::~D3D11Renderer()
 {
 }
 
-// [0, 1]
 void D3D11Renderer::clearScreen(float r, float g, float b)
 {
-	const FLOAT color[4] = {r, g, b, 1.f};
+	if (r > 255.f) r = 255.f;
+	if (g > 255.f) g = 255.f;
+	if (b > 255.f) b = 255.f;
+	const FLOAT color[4] = {r / 255.f, g / 255.f, b / 255.f, 1.f};
+
 	m_devMan->clearBackBufferRTV(color);
 }
 

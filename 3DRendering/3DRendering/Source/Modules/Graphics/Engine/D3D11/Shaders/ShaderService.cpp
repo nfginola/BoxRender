@@ -75,6 +75,12 @@ void Graphics::ShaderService::addDev(DevicePtr dev)
 
 std::string ShaderService::addShader(ShaderType type, std::string fileName, std::string shaderName)
 {
+	if (m_repo.find(shaderName) != m_repo.end())
+	{
+		assert(false);
+		return "";
+	}
+
 	if (m_dev.Get() == nullptr)
 	{
 		assert(false);
@@ -83,27 +89,35 @@ std::string ShaderService::addShader(ShaderType type, std::string fileName, std:
 
 	std::string rawData = loadShader(type, m_compiledShaderDir + fileName);
 	std::shared_ptr<IShader> shader = createShader(type, rawData);
+
 	m_repo.insert({ shaderName, shader });
 
 	return shaderName;
 
 }
 
-void ShaderService::removeShader(std::wstring name)
+void ShaderService::removeShader(std::string name)
 {
 	if (m_dev.Get() == nullptr)
 	{
 		assert(false);
 	}
 
+	auto element = m_repo.find(name);
+	if (element == m_repo.end())
+	{
+		return;
+	}
+
+	m_repo.erase(element);
+
 }
 
 std::shared_ptr<IShader> Graphics::ShaderService::getShader(std::string shaderName)
 {
 	auto element = m_repo.find(shaderName);
-	if (element != m_repo.end())
+	if (element == m_repo.end())
 	{
-		assert(false);
 		return std::shared_ptr<IShader>();
 	}
 

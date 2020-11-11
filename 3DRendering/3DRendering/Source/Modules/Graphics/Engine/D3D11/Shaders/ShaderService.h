@@ -44,7 +44,7 @@ namespace Graphics
 
 
 		std::string addShader(ShaderType type, std::string fileName, std::string shaderName);
-		void removeShader(std::wstring name);
+		void removeShader(std::string name);
 		std::shared_ptr<IShader> getShader(std::string shaderName);
 
 
