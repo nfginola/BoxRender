@@ -30,12 +30,12 @@ void D3D11Renderer::present()
 	m_devMan->getSwapChain()->Present(0, 0);
 }
 
-void Graphics::D3D11Renderer::bindShader(IShader* shader)
+void Graphics::D3D11Renderer::bindShader(std::shared_ptr<IShader> shader)
 {
 	shader->bind(m_devMan->getDeviceContext());
 }
 
-void Graphics::D3D11Renderer::unbindShader(IShader* shader)
+void Graphics::D3D11Renderer::unbindShader(std::shared_ptr<IShader> shader)
 {
 	shader->unbind(m_devMan->getDeviceContext());
 }

@@ -17,8 +17,9 @@ namespace Graphics
 
 		void clearScreen(float r, float g, float b);
 		void present();
-		void bindShader(IShader* shader);
-		void unbindShader(IShader* shader);
+		void bindShader(std::shared_ptr<IShader> shader);
+		void unbindShader(std::shared_ptr<IShader> shader);
+
 
 		// setShader(shaderType, ..)
 		// setCamera()

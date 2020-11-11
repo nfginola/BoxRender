@@ -1,8 +1,10 @@
 #pragma once
-#include "../Utilities//D3D11Utilities.h"
-#include "../DeviceManager/D3D11DeviceManager.h"
 
 #include <wrl.h>
+#include <stdint.h>
+
+#include "../Utilities//D3D11Utilities.h"
+#include "../DeviceManager/D3D11DeviceManager.h"
 
 class IShader
 {

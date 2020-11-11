@@ -15,6 +15,7 @@ using DevicePtr = Microsoft::WRL::ComPtr<ID3D11Device>;
 using DeviceContextPtr = Microsoft::WRL::ComPtr<ID3D11DeviceContext>;
 using DebugPtr = Microsoft::WRL::ComPtr<ID3D11Debug>;
 using RtvPtr = Microsoft::WRL::ComPtr<ID3D11RenderTargetView>;
+using CBufferPtr = Microsoft::WRL::ComPtr<ID3D11Buffer>;
 
 class D3D11DeviceManager
 {

@@ -9,8 +9,8 @@ private:
 public:
 	VertexShader(Microsoft::WRL::ComPtr<ID3D11VertexShader> shader);
 	~VertexShader();
-	virtual void bind(DeviceContextPtr devCon) override;
-	virtual void unbind(DeviceContextPtr devCon) override;
+	void bind(DeviceContextPtr devCon) override;
+	void unbind(DeviceContextPtr devCon) override;
 
 };
 
