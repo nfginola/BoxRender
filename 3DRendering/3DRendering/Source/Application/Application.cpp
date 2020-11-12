@@ -6,7 +6,7 @@ using namespace Input;
 
 Application::Application(HINSTANCE hInstance)
 {
-	// input and window closely tied
+	// input and window are closely tied
 	m_appWindow = std::make_unique<ApplicationWindow>(hInstance, L"Nad's Window", 1024, 576);
 	m_input = std::make_unique<InputEngine>(m_appWindow->getHWND());
 	m_appWindow->hookInput(m_input);
