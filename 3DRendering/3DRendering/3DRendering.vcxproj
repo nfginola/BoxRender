@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Modules\Input\InputEngine.cpp" />
     <ClCompile Include="Source\Application\Application.cpp" />
     <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\D3D11Renderer.cpp" />
     <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\DeviceManager\D3D11DeviceManager.cpp" />
@@ -156,11 +157,14 @@
     <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\Shaders\VertexShader.cpp" />
     <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\Utilities\D3D11Utilities.cpp" />
     <ClCompile Include="Source\Modules\Graphics\Engine\GraphicsEngine.cpp" />
+    <ClCompile Include="Source\Modules\Input\DXTK\DXTKKeyboard.cpp" />
+    <ClCompile Include="Source\Modules\Input\DXTK\DXTKMouse.cpp" />
     <ClCompile Include="Source\Modules\Window\ApplicationWindow.cpp" />
     <ClCompile Include="Source\Modules\Window\Window.cpp" />
     <ClCompile Include="Source\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Modules\Input\InputEngine.h" />
     <ClInclude Include="Source\Application\Application.h" />
     <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\D3D11Renderer.h" />
     <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\DeviceManager\D3D11DeviceManager.h" />
@@ -174,6 +178,10 @@
     <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\Shaders\VertexShader.h" />
     <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\Utilities\D3D11Utilities.h" />
     <ClInclude Include="Source\Modules\Graphics\Engine\GraphicsEngine.h" />
+    <ClInclude Include="Source\Modules\Input\DXTK\DXTKKeyboard.h" />
+    <ClInclude Include="Source\Modules\Input\DXTK\DXTKMouse.h" />
+    <ClInclude Include="Source\Modules\Input\IKeyboardInput.h" />
+    <ClInclude Include="Source\Modules\Input\IMouseInput.h" />
     <ClInclude Include="Source\Modules\Window\ApplicationWindow.h" />
     <ClInclude Include="Source\Modules\Window\Window.h" />
   </ItemGroup>

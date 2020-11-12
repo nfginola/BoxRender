@@ -1,10 +1,12 @@
 #pragma once
 #include "Window.h"
+#include "../Input/InputEngine.h"
 
 // Specific for this application (e.g custom GUI, resize, etc.)
 class ApplicationWindow : public Window
 {
 private:
+	std::shared_ptr<Input::InputEngine> m_inputEngine;
 
 public:
 	ApplicationWindow(HINSTANCE hInstance,
@@ -16,6 +18,7 @@ public:
 	~ApplicationWindow();
 
 	virtual LRESULT handleProc(const UINT& uMsg, const WPARAM& wParam, const LPARAM& lParam) override;
+	void hookInput(std::shared_ptr<Input::InputEngine> inputEngine);
 
 
 	

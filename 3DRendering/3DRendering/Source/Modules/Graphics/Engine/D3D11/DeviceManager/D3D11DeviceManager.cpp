@@ -12,7 +12,7 @@ D3D11DeviceManager::D3D11DeviceManager(const HWND& hwnd, const int& clientWidth,
 	getBackBufferRTV();
 	initializeMainViewport();
 
-	// Get Debug for printing live object details at shutdown
+	// Get Debug for printing live object details
 	HRESULT hr = m_device.Get()->QueryInterface<ID3D11Debug>(m_debug.GetAddressOf());
 	assert(SUCCEEDED(hr));
 
@@ -20,7 +20,7 @@ D3D11DeviceManager::D3D11DeviceManager(const HWND& hwnd, const int& clientWidth,
 
 D3D11DeviceManager::~D3D11DeviceManager()
 {
-	m_debug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+	//m_debug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 }
 
 void D3D11DeviceManager::clearBackBufferRTV(const FLOAT rgba[])

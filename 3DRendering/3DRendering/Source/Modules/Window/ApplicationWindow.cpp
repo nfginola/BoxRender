@@ -32,15 +32,22 @@ LRESULT ApplicationWindow::handleProc(const UINT& uMsg, const WPARAM& wParam, co
 	}
 
 	case WM_ACTIVATEAPP:
-		//m_kbInput->WindowProcedureHook(uMsg, wParam, lParam);
-		//m_mouseInput->WindowProcedureHook(uMsg, wParam, lParam);
+		if (m_inputEngine != nullptr)
+		{
+			m_inputEngine->getKeyboard()->WindowProcedureHook(uMsg, wParam, lParam);
+			m_inputEngine->getMouse()->WindowProcedureHook(uMsg, wParam, lParam);
+		}
+
 		break;
 
 	case WM_KEYDOWN:
 	case WM_SYSKEYDOWN:
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
-		//m_kbInput->WindowProcedureHook(uMsg, wParam, lParam);
+		if (m_inputEngine != nullptr)
+		{
+			m_inputEngine->getKeyboard()->WindowProcedureHook(uMsg, wParam, lParam);
+		}
 		break;
 
 	case WM_INPUT:
@@ -55,9 +62,17 @@ LRESULT ApplicationWindow::handleProc(const UINT& uMsg, const WPARAM& wParam, co
 	case WM_XBUTTONDOWN:
 	case WM_XBUTTONUP:
 	case WM_MOUSEHOVER:
-		//m_mouseInput->WindowProcedureHook(uMsg, wParam, lParam);
+		if (m_inputEngine != nullptr)
+		{
+			m_inputEngine->getMouse()->WindowProcedureHook(uMsg, wParam, lParam);
+		}
 		break;
 	
 	}
 	return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
+}
+
+void ApplicationWindow::hookInput(std::shared_ptr<Input::InputEngine> inputEngine)
+{
+	m_inputEngine = inputEngine;
 }

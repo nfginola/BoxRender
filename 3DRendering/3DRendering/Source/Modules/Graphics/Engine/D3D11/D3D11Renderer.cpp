@@ -13,6 +13,7 @@ D3D11Renderer::D3D11Renderer(const HWND& hwnd, const int& clientWidth, const int
 
 D3D11Renderer::~D3D11Renderer()
 {
+
 }
 
 void D3D11Renderer::clearScreen(float r, float g, float b)

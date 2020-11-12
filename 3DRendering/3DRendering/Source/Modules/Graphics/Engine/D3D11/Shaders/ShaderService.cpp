@@ -66,6 +66,7 @@ ShaderService::ShaderService() :
 
 ShaderService::~ShaderService()
 {
+
 }
 
 void Graphics::ShaderService::addDev(DevicePtr dev)
@@ -77,6 +78,7 @@ std::string ShaderService::addShader(ShaderType type, std::string fileName, std:
 {
 	if (m_repo.find(shaderName) != m_repo.end())
 	{
+		// Name already exist!
 		assert(false);
 		return "";
 	}
@@ -84,7 +86,7 @@ std::string ShaderService::addShader(ShaderType type, std::string fileName, std:
 	if (m_dev.Get() == nullptr)
 	{
 		assert(false);
-		return shaderName;
+		return "";
 	}
 
 	std::string rawData = loadShader(type, m_compiledShaderDir + fileName);

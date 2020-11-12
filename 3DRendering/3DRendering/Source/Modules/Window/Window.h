@@ -39,7 +39,7 @@ public:
 
 public:
 	bool isClosed();
-	HWND getHWND();
+	HWND& getHWND();
 
 	float getAspectRatio();
 	UINT getClientWidth();

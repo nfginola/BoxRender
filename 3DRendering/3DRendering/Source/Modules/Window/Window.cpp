@@ -60,7 +60,7 @@ bool Window::isClosed()
 	return m_isClosed;
 }
 
-HWND Window::getHWND()
+HWND& Window::getHWND()
 {
 	return m_hwnd;
 }
