@@ -183,33 +183,36 @@ void Graphics::D3D11Renderer::tempDraw(std::shared_ptr<Scene> scene)
 
 	}
 
-	//// Render line (IN PROGRESS)
-	//{
-	//	m_devMan->getDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-	//	m_devMan->getDeviceContext()->IASetInputLayout(nullptr);
+	// Render line (IN PROGRESS)
+	{
+		m_devMan->getDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+		m_devMan->getDeviceContext()->IASetInputLayout(nullptr);
 
-	//	shdServ.getShader("lineVS")->bind();
-	//	shdServ.getShader("lineGS")->bind();
-	//	shdServ.getShader("linePS")->bind();
-	//	shdServ.getShader("gs")->bindConstantBuffers(0, { bufServ.getBuffer("alwaysChangingCB")->getBuffer(),
-	//			bufServ.getBuffer("sometimesChangingCB")->getBuffer(),
-	//			bufServ.getBuffer("aabbCB")->getBuffer() }, 3);
+		shdServ.getShader("lineVS")->bind();
+		shdServ.getShader("lineGS")->bind();
+		shdServ.getShader("linePS")->bind();
+		shdServ.getShader("lineGS")->bindConstantBuffers(0, { bufServ.getBuffer("alwaysChangingCB")->getBuffer(),
+				bufServ.getBuffer("sometimesChangingCB")->getBuffer(),
+				bufServ.getBuffer("aabbCB")->getBuffer() }, 3);
 
-	//	struct aabbDat
-	//	{
-	//		float x, y, z;
-	//	};
+		struct aabbDat
+		{
+			float x, y, z;
+		};
 
-	//	for (const auto& mesh : meshes)
-	//	{
-	//
+		// For each AABB -- Get them down here! (Do it in a separate function called from Graphics! e.g drawAABB)
+		//bufServ.getBuffer("aabbCB")->updateBufferMap()
+		m_devMan->getDeviceContext()->Draw(1, 0);
 
-	//		bufServ.getBuffer("aabbCB")->updateBufferMap()
+		m_devConHelper->unbindShader(ShaderType::VERTEX_SHADER);
+		m_devConHelper->unbindShader(ShaderType::GEOMETRY_SHADER);
+		m_devConHelper->unbindShader(ShaderType::PIXEL_SHADER);
 
-	//		m_devMan->getDeviceContext()->Draw(1, 0);
-	//	}
 
-	//}
+
+
+
+	}
 
 
 
