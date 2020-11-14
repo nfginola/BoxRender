@@ -3,8 +3,10 @@
 #include <memory>
 #include <DirectXTK/SimpleMath.h>
 
+
 #include "../Mesh/Mesh.h"
 #include "../Buffers/BufferService.h"
+
 
 enum class ShaderType
 {
@@ -30,7 +32,17 @@ namespace D3D11Utilities
 		DirectX::SimpleMath::Matrix projectionMatrix;
 	};
 
+
+	struct TextureData
+	{
+		void* data;
+		int width, height, channels;
+
+	};
+
 	std::string loadShader(std::string fileName);
+
+	TextureData loadTextureData(std::string fileName);
 
 	//std::shared_ptr<Mesh> loadMesh(const std::string& filePath, const std::string& meshID);
 };

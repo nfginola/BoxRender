@@ -8,7 +8,9 @@
 #include "Shaders/ShaderService.h"
 #include "Buffers/BufferService.h"
 #include "D3D11ContextHelper.h"
+#include "Pipeline/TextureBatchDraw.h"
 
+class TextureBatchDraw;
 
 namespace Graphics
 {
@@ -17,8 +19,12 @@ namespace Graphics
 	{
 	private:
 
-		std::unique_ptr<D3D11DeviceManager> m_devMan;
+		std::shared_ptr<D3D11DeviceManager> m_devMan;
 		std::shared_ptr<D3D11ContextHelper> m_devConHelper;
+		std::shared_ptr<TextureBatchDraw> m_textureBatchDraw;
+
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> m_dsv;	// temp
+
 
 
 	public:
@@ -29,12 +35,12 @@ namespace Graphics
 		void clearScreen(float r, float g, float b);
 		void present();
 
-
-
 		// .... deviceContext->Draw(3,0)
 
 		void tempDraw(std::shared_ptr<Scene> scene);
 		
+
+
 		// setShader(shaderType, ..)
 		// setCamera()
 

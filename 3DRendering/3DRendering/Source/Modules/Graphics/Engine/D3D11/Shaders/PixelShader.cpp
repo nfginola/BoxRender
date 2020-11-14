@@ -21,6 +21,8 @@ void PixelShader::bindConstantBuffers(std::uint8_t startSlot, std::vector<Micros
 	IShader::gatherConstantBuffers(buffers, count);
 
 	m_devCon->PSSetConstantBuffers(startSlot, count, m_buffersIntermediary.data());
+
+	IShader::clearBuffers();
 }
 
 void PixelShader::bindShaderResources(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> resources, std::uint8_t count)
@@ -28,6 +30,8 @@ void PixelShader::bindShaderResources(std::uint8_t startSlot, std::vector<Micros
 	IShader::gatherShaderResources(resources, count);
 
 	m_devCon->PSSetShaderResources(startSlot, count, m_resourcesIntermediary.data());
+
+	IShader::clearResources();
 }
 
 void PixelShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerState>> samplers, std::uint8_t count)
@@ -35,4 +39,6 @@ void PixelShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WR
 	IShader::gatherSamplers(samplers, count);
 
 	m_devCon->PSSetSamplers(startSlot, count, m_samplersIntermediary.data());
+	
+	IShader::clearSamplers();
 }

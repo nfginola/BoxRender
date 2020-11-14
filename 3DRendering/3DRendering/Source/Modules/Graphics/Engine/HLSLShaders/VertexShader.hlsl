@@ -44,16 +44,8 @@ VS_OUT main(VS_IN input)
     VS_OUT output = (VS_OUT) 0;
     
     output.pos = mul(g_projectionMatrix, mul(g_viewMatrix, mul(g_worldMatrix, input.pos)));
-    output.nor = normalize(mul(g_worldMatrix, float4(input.nor, 0.f)));
+    output.nor = normalize(mul(g_worldMatrix, normalize(float4(input.nor, 0.f))));
     output.uv = input.uv;
     
     return output;
 }
-
-
-
-//float4 main(uint vID : SV_VertexID) : SV_POSITION
-//{
-//    float heyy = a;
-//    return float4(CUBE[vID].xyz, d);
-//}

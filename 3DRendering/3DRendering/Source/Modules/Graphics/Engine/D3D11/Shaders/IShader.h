@@ -19,6 +19,10 @@ protected:
 	void gatherShaderResources(std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> resources, std::uint8_t count);
 	void gatherSamplers(std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerState>> samplers, std::uint8_t count);
 
+	void clearBuffers();
+	void clearResources();
+	void clearSamplers();
+
 public:
 	IShader(DeviceContextPtr devCon);
 	virtual ~IShader() = 0;

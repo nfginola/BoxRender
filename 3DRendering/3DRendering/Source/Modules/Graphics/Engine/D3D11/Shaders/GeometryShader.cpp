@@ -20,6 +20,8 @@ void GeometryShader::bindConstantBuffers(std::uint8_t startSlot, std::vector<Mic
 	IShader::gatherConstantBuffers(buffers, count);
 
 	m_devCon->GSSetConstantBuffers(startSlot, count, m_buffersIntermediary.data());
+
+	IShader::clearBuffers();
 }
 
 void GeometryShader::bindShaderResources(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> resources, std::uint8_t count)
@@ -27,6 +29,8 @@ void GeometryShader::bindShaderResources(std::uint8_t startSlot, std::vector<Mic
 	IShader::gatherShaderResources(resources, count);
 
 	m_devCon->VSSetShaderResources(startSlot, count, m_resourcesIntermediary.data());
+
+	IShader::clearResources();
 }
 
 void GeometryShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerState>> samplers, std::uint8_t count)
@@ -34,4 +38,6 @@ void GeometryShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft:
 	IShader::gatherSamplers(samplers, count);
 
 	m_devCon->GSSetSamplers(startSlot, count, m_samplersIntermediary.data());
+
+	IShader::clearSamplers();
 }

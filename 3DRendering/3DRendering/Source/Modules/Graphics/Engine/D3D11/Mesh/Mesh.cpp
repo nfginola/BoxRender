@@ -1,9 +1,10 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::string& vboID, const std::string& iboID, std::vector<Subset> subsets) :
+Mesh::Mesh(const std::string& vboID, const std::string& iboID, std::map<std::string, std::vector<Mesh::Subset>> textureBatchedSubsets) :
 	m_vboID(vboID),
 	m_iboID(iboID),
-	m_subsets(subsets)
+	m_shouldRender(true),
+	m_textureBatchedSubsets(textureBatchedSubsets)
 {
 
 }
@@ -16,13 +17,27 @@ void Mesh::setWorldMatrix(DirectX::SimpleMath::Vector3 pos, DirectX::SimpleMath:
 {
 	m_worldMatrix = DirectX::SimpleMath::Matrix::CreateScale(scale);
 
-	// Right handed matrices
-	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationX(-rot.x);
-	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationY(-rot.y);
-	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationZ(-rot.z);
+	/*
+		"Angle of rotation around the x-axis, in radians. Angles are measured clockwise when looking at the rotation axis [toward] the origin."
+		Left hand!
+	*/
+
+	// LH matrices - these two are the same
+	//m_worldMatrix *= DirectX::XMMatrixRotationX(rot.x);
+	//m_worldMatrix *= DirectX::XMMatrixRotationY(rot.y);
+	//m_worldMatrix *= DirectX::XMMatrixRotationZ(rot.z);
+
+	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationX(rot.x);
+	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationY(rot.y);
+	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationZ(rot.z);
 
 	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateTranslation(pos);
 
+}
+
+void Mesh::setRenderMode(bool mode)
+{
+	m_shouldRender = mode;
 }
 
 const DirectX::SimpleMath::Matrix& Mesh::getWorldMatrix()
@@ -41,7 +56,23 @@ const std::string& Mesh::getIBOID()
 
 }
 
-const std::vector<Mesh::Subset>& Mesh::getSubsets()
+const std::map<std::string, std::vector<Mesh::Subset>>& Mesh::getTextureBatchedSubsets()
 {
-	return m_subsets;
+	return m_textureBatchedSubsets;
 }
+
+bool Mesh::shouldRender()
+{
+	return m_shouldRender;
+}
+
+
+bool Mesh::Subset::Material::operator<(const Mesh::Subset::Material& rhs)
+{
+	if (diffuseID < rhs.diffuseID)
+	{
+		return true;
+	}
+	return false;
+}
+

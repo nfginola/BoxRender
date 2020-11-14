@@ -2,9 +2,14 @@
 
 std::shared_ptr<Model> Scene::createModel(const std::string& fileName, const std::string& meshID)
 {
-	std::shared_ptr<Mesh> mesh = ModelLoader::loadMesh(fileName, meshID);
+	DirectX::BoundingBox aabb;
+
+	std::shared_ptr<Mesh> mesh = ModelLoader::loadMesh(fileName, meshID, aabb);
 	m_meshes.push_back(mesh);
-	return std::make_shared<Model>(mesh);
+
+	std::shared_ptr<Model> model = std::make_shared<Model>(mesh, aabb);
+	m_models.push_back(model);
+	return model;
 }
 
 void Scene::baseUpdate(float dt)

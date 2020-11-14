@@ -27,6 +27,21 @@ void IShader::gatherSamplers(std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerSta
 	}
 }
 
+void IShader::clearBuffers()
+{
+	m_buffersIntermediary.clear();
+}
+
+void IShader::clearResources()
+{
+	m_resourcesIntermediary.clear();
+}
+
+void IShader::clearSamplers()
+{
+	m_samplersIntermediary.clear();
+}
+
 IShader::IShader(DeviceContextPtr devCon) :
 	m_devCon(devCon)
 {

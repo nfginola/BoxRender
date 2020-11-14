@@ -108,6 +108,12 @@
     <ClCompile Include="Source\Modules\Graphics\Engine\ModelLoader\LoaderUtility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\Pipeline\TextureBatchDraw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\Texture\TextureService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application\Application.h">
@@ -209,6 +215,12 @@
     <ClInclude Include="Source\Modules\Graphics\Engine\ModelLoader\LoaderUtility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\Pipeline\TextureBatchDraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\Texture\TextureService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\ComputeShader.hlsl" />
@@ -217,5 +229,8 @@
     <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\HullShader.hlsl" />
     <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\PixelShader.hlsl" />
     <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\VertexShader.hlsl" />
+    <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\LineVS.hlsl" />
+    <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\LineGS.hlsl" />
+    <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\LinePS.hlsl" />
   </ItemGroup>
 </Project>

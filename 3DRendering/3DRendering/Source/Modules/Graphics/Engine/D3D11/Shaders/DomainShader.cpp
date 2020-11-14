@@ -20,6 +20,8 @@ void DomainShader::bindConstantBuffers(std::uint8_t startSlot, std::vector<Micro
 	IShader::gatherConstantBuffers(buffers, count);
 
 	m_devCon->DSSetConstantBuffers(startSlot, count, m_buffersIntermediary.data());
+
+	IShader::clearBuffers();
 }
 
 void DomainShader::bindShaderResources(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> resources, std::uint8_t count)
@@ -27,6 +29,8 @@ void DomainShader::bindShaderResources(std::uint8_t startSlot, std::vector<Micro
 	IShader::gatherShaderResources(resources, count);
 
 	m_devCon->VSSetShaderResources(startSlot, count, m_resourcesIntermediary.data());
+
+	IShader::clearResources();
 }
 
 void DomainShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerState>> samplers, std::uint8_t count)
@@ -34,4 +38,6 @@ void DomainShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::W
 	IShader::gatherSamplers(samplers, count);
 
 	m_devCon->DSSetSamplers(startSlot, count, m_samplersIntermediary.data());
+
+	IShader::clearSamplers();
 }

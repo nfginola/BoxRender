@@ -14,7 +14,7 @@ GraphicsEngine::~GraphicsEngine()
 
 void GraphicsEngine::render(float dt)
 {
-	m_renderer->clearScreen(30.f, 110.f, 30.f);
+	m_renderer->clearScreen(0.f, 0.f, 0.f);
 
 	// Tech
 	// batching..

@@ -23,18 +23,22 @@ void VertexShader::bindConstantBuffers(std::uint8_t startSlot, std::vector<Micro
 	IShader::gatherConstantBuffers(buffers, count);
 	
 	m_devCon->VSSetConstantBuffers(startSlot, count, m_buffersIntermediary.data());
+
+	IShader::clearBuffers();
 }
 
 void VertexShader::bindShaderResources(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> resources, std::uint8_t count)
 {
 	IShader::gatherShaderResources(resources, count);
 	m_devCon->VSSetShaderResources(startSlot, count, m_resourcesIntermediary.data());
+	IShader::clearResources();
 }
 	
 
 void VertexShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerState>> samplers, std::uint8_t count)
 {
 	IShader::gatherSamplers(samplers, count);
-
 	m_devCon->VSSetSamplers(startSlot, count, m_samplersIntermediary.data());
+	IShader::clearSamplers();
+
 }

@@ -20,6 +20,8 @@ void HullShader::bindConstantBuffers(std::uint8_t startSlot, std::vector<Microso
 	IShader::gatherConstantBuffers(buffers, count);
 
 	m_devCon->HSSetConstantBuffers(startSlot, count, m_buffersIntermediary.data());
+
+	IShader::clearBuffers();
 }
 
 void HullShader::bindShaderResources(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> resources, std::uint8_t count)
@@ -27,6 +29,8 @@ void HullShader::bindShaderResources(std::uint8_t startSlot, std::vector<Microso
 	IShader::gatherShaderResources(resources, count);
 
 	m_devCon->PSSetShaderResources(startSlot, count, m_resourcesIntermediary.data());
+
+	IShader::clearResources();
 }
 
 void HullShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerState>> samplers, std::uint8_t count)
@@ -34,4 +38,6 @@ void HullShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WRL
 	IShader::gatherSamplers(samplers, count);
 
 	m_devCon->HSSetSamplers(startSlot, count, m_samplersIntermediary.data());
+
+	IShader::clearSamplers();
 }

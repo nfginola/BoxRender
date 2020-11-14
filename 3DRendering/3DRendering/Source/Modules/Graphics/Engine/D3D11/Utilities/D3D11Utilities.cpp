@@ -3,6 +3,9 @@
 #include <assert.h>
 #include <windows.h>
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
 #include "D3D11Utilities.h"
 #include "../../ModelLoader/AssimpModelLoader.h"
 
@@ -34,6 +37,22 @@ namespace D3D11Utilities
 
 		return data;
 	}
+
+
+	TextureData loadTextureData(std::string fileName)
+	{
+		TextureData textData = { };
+		unsigned char* data = stbi_load(fileName.c_str(), &textData.width, &textData.height, &textData.channels, STBI_rgb_alpha);
+
+		textData.data = calloc(textData.width * textData.height, sizeof(std::uint32_t));
+		std::memcpy(textData.data, data, textData.width * textData.height * sizeof(std::uint32_t));
+
+		stbi_image_free(data);
+
+		return textData;
+	}
+
+
 }
 
 //std::shared_ptr<Mesh> D3D11Utilities::loadMesh(const std::string& filePath, const std::string& meshID)

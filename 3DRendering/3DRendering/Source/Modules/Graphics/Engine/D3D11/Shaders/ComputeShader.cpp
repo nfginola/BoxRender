@@ -20,7 +20,8 @@ void ComputeShader::bindConstantBuffers(std::uint8_t startSlot, std::vector<Micr
 	IShader::gatherConstantBuffers(buffers, count);
 
 	m_devCon->CSSetConstantBuffers(startSlot, count, m_buffersIntermediary.data());
-	m_buffersIntermediary.clear();
+	
+	IShader::clearBuffers();
 }
 
 void ComputeShader::bindShaderResources(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> resources, std::uint8_t count)
@@ -28,7 +29,8 @@ void ComputeShader::bindShaderResources(std::uint8_t startSlot, std::vector<Micr
 	IShader::gatherShaderResources(resources, count);
 
 	m_devCon->VSSetShaderResources(startSlot, count, m_resourcesIntermediary.data());
-	m_resourcesIntermediary.clear();
+	
+	IShader::clearResources();
 }
 
 void ComputeShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerState>> samplers, std::uint8_t count)
@@ -36,6 +38,6 @@ void ComputeShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::
 	IShader::gatherSamplers(samplers, count);
 
 	m_devCon->CSSetSamplers(startSlot, count, m_samplersIntermediary.data());
-	m_samplersIntermediary.clear();
+	IShader::clearSamplers();
 }
 

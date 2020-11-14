@@ -125,8 +125,11 @@ std::string Graphics::ShaderService::addVertexShader(std::string fileName, std::
 
 	// Create input layout
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
-	hr = m_dev->CreateInputLayout(inputLayoutDesc.data(), inputLayoutDesc.size(), rawData.data(), rawData.size(), inputLayout.GetAddressOf());
-	assert(SUCCEEDED(hr));
+	if (inputLayoutDesc.size() != 0)
+	{
+		hr = m_dev->CreateInputLayout(inputLayoutDesc.data(), inputLayoutDesc.size(), rawData.data(), rawData.size(), inputLayout.GetAddressOf());
+		assert(SUCCEEDED(hr));
+	}
 
 	std::shared_ptr<IShader> shader = std::make_shared<VertexShader>(vs, m_devCon, inputLayout);
 

@@ -14,11 +14,11 @@ BufferService::~BufferService()
 
 std::string Graphics::BufferService::createBuffer(BufferType type, CD3D11_BUFFER_DESC desc, void* initData, std::string name)
 {
-	if (m_repo.find(name) != m_repo.end())
+	auto el = m_repo.find(name);
+	if (el != m_repo.end())
 	{
-		// Name already exist!
-		assert(false);
-		return "";
+		// Buffer already exist!
+		return name;
 	}
 
 	if (m_dev.Get() == nullptr)
@@ -35,7 +35,7 @@ std::string Graphics::BufferService::createBuffer(BufferType type, CD3D11_BUFFER
 	{
 	case BufferType::CONSTANT_BUFFER:
 		// Align 16 byte
-		
+		desc.ByteWidth = initialByteWidth + (16 - (initialByteWidth % 16));
 		buf = createBuffer(desc, initData);
 		break;
 	default:
@@ -52,7 +52,7 @@ std::shared_ptr<Buffer> BufferService::getBuffer(std::string name)
 	auto element = m_repo.find(name);
 	if (element == m_repo.end())
 	{
-		return std::shared_ptr<Buffer>();
+		return nullptr;
 	}
 
 	return element->second;
