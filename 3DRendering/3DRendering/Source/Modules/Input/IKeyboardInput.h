@@ -16,15 +16,15 @@ namespace Input
 
 		IKeyboardInput(const IKeyboardInput& rhs) = delete;
 
-		virtual bool IsKeyPressed(const std::string& key) = 0;
-		virtual bool IsKeyDown(const std::string& key) = 0;
-		virtual void Update() = 0;
+		virtual bool isKeyPressed(const std::string& key) = 0;
+		virtual bool isKeyDown(const std::string& key) = 0;
+		virtual void update() = 0;
 
 	private:
 		friend Window;
 		friend ApplicationWindow;
 
-		virtual void WindowProcedureHook(UINT message, WPARAM wParam, LPARAM lParam) = 0;
+		virtual void windowProcedureHook(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 
 
 

@@ -22,12 +22,15 @@ namespace Graphics
 		const std::string m_compiledShaderDir;
 		std::map<std::string, std::shared_ptr<IShader>> m_repo;
 		DevicePtr m_dev;
+		DeviceContextPtr m_devCon;
 
 	private:
 		friend class D3D11Renderer;	 // For initialization
 		void addDev(DevicePtr dev);
+		void addDevCon(DeviceContextPtr devCon);
 
 		std::shared_ptr<IShader> createShader(ShaderType type, const std::string& rawData);
+
 
 	public:
 		static ShaderService& getInstance()
@@ -44,6 +47,7 @@ namespace Graphics
 
 
 		std::string addShader(ShaderType type, std::string fileName, std::string shaderName);
+		std::string addVertexShader(std::string fileName, std::string shaderName, std::vector<D3D11_INPUT_ELEMENT_DESC> inputLayoutDesc);
 		void removeShader(std::string name);
 		std::shared_ptr<IShader> getShader(std::string shaderName);
 

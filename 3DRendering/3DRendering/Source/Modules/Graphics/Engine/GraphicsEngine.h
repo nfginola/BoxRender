@@ -3,6 +3,7 @@
 
 #include "D3D11/D3D11Renderer.h"
 
+class Scene;
 
 namespace Graphics
 {
@@ -10,18 +11,20 @@ namespace Graphics
 	{
 	private:
 		std::shared_ptr<D3D11Renderer> m_renderer;
+		std::shared_ptr<Scene> m_activeScene;
 
-		// mb batching system that takes in the renderer?
-		// batchingSystem(m_renderer);
-		// ...
-		
-		// tech goes here..
+		// Scene
+		// 
+		// cameras.. (just data)
+		// model loader
 
 	public:
 		GraphicsEngine(const HWND& hwnd, const int& clientWidth, const int& clientHeight);
 		~GraphicsEngine();
 
 		void render(float dt);
+
+		void setScene(std::shared_ptr<Scene> scene);
 
 	};
 }

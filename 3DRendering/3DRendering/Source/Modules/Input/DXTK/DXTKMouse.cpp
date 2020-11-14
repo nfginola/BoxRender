@@ -18,7 +18,7 @@ DXTKMouse::~DXTKMouse()
 {
 }
 
-int DXTKMouse::GetDeltaX()
+int DXTKMouse::getDeltaX()
 {
 	if (m_mouseState.positionMode == Mouse::MODE_RELATIVE)
 	{
@@ -30,7 +30,7 @@ int DXTKMouse::GetDeltaX()
 	}
 }
 
-int DXTKMouse::GetDeltaY()
+int DXTKMouse::getDeltaY()
 {
 	if (m_mouseState.positionMode == Mouse::MODE_RELATIVE)
 	{
@@ -42,7 +42,7 @@ int DXTKMouse::GetDeltaY()
 	}
 }
 
-int DXTKMouse::GetScreenCoordX()
+int DXTKMouse::getScreenCoordX()
 {
 	int num = 0;
 	if (m_mouseState.positionMode == Mouse::MODE_ABSOLUTE)
@@ -51,11 +51,11 @@ int DXTKMouse::GetScreenCoordX()
 	}
 	else
 	{
-		return GetCursorPoint().x;
+		return getCursorPoint().x;
 	}
 }
 
-int DXTKMouse::GetScreenCoordY()
+int DXTKMouse::getScreenCoordY()
 {
 	int num = 0;
 	if (m_mouseState.positionMode == Mouse::MODE_ABSOLUTE)
@@ -64,18 +64,18 @@ int DXTKMouse::GetScreenCoordY()
 	}
 	else
 	{
-		return GetCursorPoint().y;
+		return getCursorPoint().y;
 
 	}
 }
 
-void DXTKMouse::HideMouse()
+void DXTKMouse::hideMouse()
 {
 	m_mouse->SetMode(DirectX::Mouse::MODE_RELATIVE);
 
 }
 
-void DXTKMouse::ShowMouse()
+void DXTKMouse::showMouse()
 {
 	m_mouse->SetMode(DirectX::Mouse::MODE_ABSOLUTE);
 }
@@ -95,21 +95,21 @@ bool DXTKMouse::MMBDown()
 	return m_mouseState.middleButton;
 }
 
-int DXTKMouse::GetScrollWheelValue()
+int DXTKMouse::getScrollWheelValue()
 {
 	return m_mouseState.scrollWheelValue;
 }
 
-void DXTKMouse::Update()
+void DXTKMouse::update()
 {
 	m_mouseState = m_mouse->GetState();
 	m_mouseTracker.Update(m_mouseState);
 
 	if (m_mouseState.positionMode == Mouse::MODE_RELATIVE)
-		CenterMousePosition();
+		centerMousePosition();
 }
 
-void DXTKMouse::WindowProcedureHook(UINT message, WPARAM wParam, LPARAM lParam)
+void DXTKMouse::windowProcedureHook(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (!m_initialized)
 	{
@@ -120,7 +120,7 @@ void DXTKMouse::WindowProcedureHook(UINT message, WPARAM wParam, LPARAM lParam)
 	Mouse::ProcessMessage(message, wParam, lParam);
 }
 
-void DXTKMouse::CenterMousePosition()
+void DXTKMouse::centerMousePosition()
 {
 	RECT r;
 	GetClientRect(m_hwnd, &r);
@@ -137,7 +137,7 @@ void DXTKMouse::CenterMousePosition()
 
 }
 
-POINT DXTKMouse::GetCursorPoint()
+POINT DXTKMouse::getCursorPoint()
 {
 	POINT p;
 	GetCursorPos(&p);

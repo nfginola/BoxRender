@@ -1,13 +1,15 @@
-#include "D3D11Utilities.h"
-
 #include <fstream>
 #include <iostream>
 #include <assert.h>
 #include <windows.h>
 
+#include "D3D11Utilities.h"
+#include "../../ModelLoader/AssimpModelLoader.h"
+
+
 namespace D3D11Utilities
 {
-	std::string D3D11Utilities::loadShader(ShaderType type, std::string fileName)
+	std::string D3D11Utilities::loadShader(std::string fileName)
 	{
 		std::string data;
 		std::ifstream fileStream;
@@ -34,3 +36,45 @@ namespace D3D11Utilities
 	}
 }
 
+//std::shared_ptr<Mesh> D3D11Utilities::loadMesh(const std::string& filePath, const std::string& meshID)
+//{
+//	// Prepare services
+//	static std::unique_ptr<ModelLoader::IModelLoader> loader = std::make_unique<ModelLoader::AssimpModelLoader>();
+//	Graphics::BufferService& bufService = Graphics::BufferService::getInstance();
+//
+//	std::string vboID = meshID + "_vbo";
+//	std::string iboID = meshID + "_ibo";
+//
+//	// Load mesh
+//	ModelLoader::IModelLoader::EngineMeshData modelData = loader->loadStaticModel(filePath);
+//
+//	// Create VBO and IBO
+//	bufService.createBuffer(
+//		Graphics::BufferType::NOT_USED,
+//		CD3D11_BUFFER_DESC(
+//			sizeof(ModelLoader::IModelLoader::Vertex) * modelData.m_vertices.size(),
+//			D3D11_BIND_VERTEX_BUFFER, D3D11_USAGE_IMMUTABLE), modelData.m_vertices.data(), vboID);
+//
+//	bufService.createBuffer(
+//		Graphics::BufferType::NOT_USED,
+//		CD3D11_BUFFER_DESC(
+//			sizeof(ModelLoader::IModelLoader::Vertex) * modelData.m_vertices.size(),
+//			D3D11_BIND_VERTEX_BUFFER, D3D11_USAGE_IMMUTABLE), modelData.m_vertices.data(), vboID);
+//
+//	// Convert to mesh subset
+//	std::vector<Mesh::Subset> subsets;
+//	subsets.reserve(modelData.m_subsetsInfo.size());
+//	for (const auto& modelSubset : modelData.m_subsetsInfo)
+//	{
+//		Mesh::Subset subset;
+//		subset.m_indexStart = modelSubset.m_indexStart;
+//		subset.m_indexCount = modelSubset.m_indexCount;
+//		subset.m_vertexStart = modelSubset.m_vertexStart;
+//		
+//		subset.diffuseID = "default";
+//
+//		subsets.push_back(subset);
+//	}
+//
+//	return std::make_shared<Mesh>(vboID, iboID, subsets);
+//}

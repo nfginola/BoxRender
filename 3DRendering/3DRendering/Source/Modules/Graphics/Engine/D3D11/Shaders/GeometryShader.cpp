@@ -1,6 +1,7 @@
 #include "GeometryShader.h"
 
-GeometryShader::GeometryShader(Microsoft::WRL::ComPtr<ID3D11GeometryShader> shader) :
+GeometryShader::GeometryShader(Microsoft::WRL::ComPtr<ID3D11GeometryShader> shader, DeviceContextPtr devCon) :
+	IShader::IShader(devCon),
 	m_shader(shader)
 {
 }
@@ -9,13 +10,28 @@ GeometryShader::~GeometryShader()
 {
 }
 
-void GeometryShader::bind(DeviceContextPtr devCon)
+void GeometryShader::bind()
 {
-	devCon->GSSetShader(m_shader.Get(), NULL, NULL);
+	m_devCon->GSSetShader(m_shader.Get(), NULL, NULL);
 }
 
-void GeometryShader::unbind(DeviceContextPtr devCon)
+void GeometryShader::bindConstantBuffers(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11Buffer>> buffers, std::uint8_t count)
 {
-	devCon->GSSetShader(nullptr, NULL, NULL);
+	IShader::gatherConstantBuffers(buffers, count);
 
+	m_devCon->GSSetConstantBuffers(startSlot, count, m_buffersIntermediary.data());
+}
+
+void GeometryShader::bindShaderResources(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> resources, std::uint8_t count)
+{
+	IShader::gatherShaderResources(resources, count);
+
+	m_devCon->VSSetShaderResources(startSlot, count, m_resourcesIntermediary.data());
+}
+
+void GeometryShader::bindSamplers(std::uint8_t startSlot, std::vector<Microsoft::WRL::ComPtr<ID3D11SamplerState>> samplers, std::uint8_t count)
+{
+	IShader::gatherSamplers(samplers, count);
+
+	m_devCon->GSSetSamplers(startSlot, count, m_samplersIntermediary.data());
 }

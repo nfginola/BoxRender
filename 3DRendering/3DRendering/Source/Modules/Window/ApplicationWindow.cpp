@@ -34,8 +34,8 @@ LRESULT ApplicationWindow::handleProc(const UINT& uMsg, const WPARAM& wParam, co
 	case WM_ACTIVATEAPP:
 		if (m_inputEngine != nullptr)
 		{
-			m_inputEngine->getKeyboard()->WindowProcedureHook(uMsg, wParam, lParam);
-			m_inputEngine->getMouse()->WindowProcedureHook(uMsg, wParam, lParam);
+			m_inputEngine->getKeyboard()->windowProcedureHook(uMsg, wParam, lParam);
+			m_inputEngine->getMouse()->windowProcedureHook(uMsg, wParam, lParam);
 		}
 
 		break;
@@ -46,7 +46,7 @@ LRESULT ApplicationWindow::handleProc(const UINT& uMsg, const WPARAM& wParam, co
 	case WM_SYSKEYUP:
 		if (m_inputEngine != nullptr)
 		{
-			m_inputEngine->getKeyboard()->WindowProcedureHook(uMsg, wParam, lParam);
+			m_inputEngine->getKeyboard()->windowProcedureHook(uMsg, wParam, lParam);
 		}
 		break;
 
@@ -64,7 +64,7 @@ LRESULT ApplicationWindow::handleProc(const UINT& uMsg, const WPARAM& wParam, co
 	case WM_MOUSEHOVER:
 		if (m_inputEngine != nullptr)
 		{
-			m_inputEngine->getMouse()->WindowProcedureHook(uMsg, wParam, lParam);
+			m_inputEngine->getMouse()->windowProcedureHook(uMsg, wParam, lParam);
 		}
 		break;
 	

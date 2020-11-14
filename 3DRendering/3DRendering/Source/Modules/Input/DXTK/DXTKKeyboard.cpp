@@ -46,6 +46,8 @@ Keyboard::Keys MapStringToKey(const std::string& key)
 	else if (key == "8") return Keyboard::Keys::D8;
 	else if (key == "9") return Keyboard::Keys::D9;
 
+	else if (key == "SPACE") return Keyboard::Keys::Space;
+
 	else return Keyboard::Keys::None;
 }
 
@@ -58,27 +60,27 @@ DXTKKeyboard::~DXTKKeyboard()
 {
 }
 
-bool DXTKKeyboard::IsKeyPressed(const std::string& key)
+bool DXTKKeyboard::isKeyPressed(const std::string& key)
 {
 	return m_kbStateTracker.IsKeyPressed(MapStringToKey(key));
 }
 
-bool DXTKKeyboard::IsKeyDown(const std::string& key)
+bool DXTKKeyboard::isKeyDown(const std::string& key)
 {
 	return m_kbState.IsKeyDown(MapStringToKey(key));
 }
 
-void DXTKKeyboard::WindowProcedureHook(UINT uMsg, WPARAM wParam, LPARAM lParam)
+void DXTKKeyboard::windowProcedureHook(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	DirectX::Keyboard::ProcessMessage(uMsg, wParam, lParam);
 }
 
-void DXTKKeyboard::Update()
+void DXTKKeyboard::update()
 {
-	UpdateState();
+	updateState();
 }
 
-void DXTKKeyboard::UpdateState()
+void DXTKKeyboard::updateState()
 {
 	m_kbState = m_keyboard->GetState();
 	m_kbStateTracker.Update(m_kbState);

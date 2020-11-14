@@ -15,8 +15,8 @@ Input::InputEngine::~InputEngine()
 
 void Input::InputEngine::update(float dt)
 {
-	m_mouseInput->Update();
-	m_kbInput->Update();
+	m_mouseInput->update();
+	m_kbInput->update();
 }
 
 std::shared_ptr<IMouseInput> Input::InputEngine::getMouse()

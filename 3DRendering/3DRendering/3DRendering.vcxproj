@@ -86,7 +86,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -101,7 +101,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -116,7 +116,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -131,7 +131,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -143,6 +143,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Modules\Graphics\Engine\ModelLoader\AssimpModelLoader.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Engine\ModelLoader\LoaderUtility.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Entities\Model.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Entities\Player.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Entities\GameEntity.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Components\Camera.cpp" />
+    <ClCompile Include="Source\Modules\Scene\DefaultScene.cpp" />
+    <ClCompile Include="Source\Modules\Scene\Scene.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\D3D11ContextHelper.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\Buffers\BufferService.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Modules\Input\InputEngine.cpp" />
     <ClCompile Include="Source\Application\Application.cpp" />
     <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\D3D11Renderer.cpp" />
@@ -162,8 +173,21 @@
     <ClCompile Include="Source\Modules\Window\ApplicationWindow.cpp" />
     <ClCompile Include="Source\Modules\Window\Window.cpp" />
     <ClCompile Include="Source\Source.cpp" />
+    <ClCompile Include="Source\Modules\Graphics\Engine\D3D11\Mesh\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Modules\Graphics\Engine\ModelLoader\AssimpModelLoader.h" />
+    <ClInclude Include="Source\Modules\Graphics\Engine\ModelLoader\IModelLoader.h" />
+    <ClInclude Include="Source\Modules\Graphics\Engine\ModelLoader\LoaderUtility.h" />
+    <ClInclude Include="Source\Modules\Graphics\Entities\Model.h" />
+    <ClInclude Include="Source\Modules\Graphics\Entities\Player.h" />
+    <ClInclude Include="Source\Modules\Graphics\Entities\GameEntity.h" />
+    <ClInclude Include="Source\Modules\Graphics\Components\Camera.h" />
+    <ClInclude Include="Source\Modules\Scene\DefaultScene.h" />
+    <ClInclude Include="Source\Modules\Scene\Scene.h" />
+    <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\D3D11ContextHelper.h" />
+    <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\Buffers\BufferService.h" />
+    <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\Buffers\Buffer.h" />
     <ClInclude Include="Source\Modules\Input\InputEngine.h" />
     <ClInclude Include="Source\Application\Application.h" />
     <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\D3D11Renderer.h" />
@@ -184,17 +208,18 @@
     <ClInclude Include="Source\Modules\Input\IMouseInput.h" />
     <ClInclude Include="Source\Modules\Window\ApplicationWindow.h" />
     <ClInclude Include="Source\Modules\Window\Window.h" />
+    <ClInclude Include="Source\Modules\Graphics\Engine\D3D11\Mesh\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\ComputeShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
@@ -216,13 +241,13 @@
     </FxCompile>
     <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\GeometryShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
@@ -251,6 +276,10 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Source\Modules\Graphics\Engine\HLSLShaders\VertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
@@ -261,6 +290,10 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)Source\CompiledShaders\%(Filename).cso</ObjectFileOutput>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

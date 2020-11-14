@@ -12,27 +12,27 @@ namespace Input
 		DXTKMouse(HWND& hwnd);		// Important reference: hwnd doesn't exist yet until the first WindowProcedureHook call
 		~DXTKMouse();
 
-		int GetDeltaX() override;
-		int GetDeltaY() override;
+		int getDeltaX() override;
+		int getDeltaY() override;
 
-		int GetScreenCoordX() override;
-		int GetScreenCoordY() override;
+		int getScreenCoordX() override;
+		int getScreenCoordY() override;
 
-		void HideMouse() override;
-		void ShowMouse() override;
+		void hideMouse() override;
+		void showMouse() override;
 
 		bool LMBDown() override;
 		bool RMBDown() override;
 		bool MMBDown() override;
 
-		int GetScrollWheelValue() override;
+		int getScrollWheelValue() override;
 
-		void Update() override;
+		void update() override;
 
 	private:
-		void WindowProcedureHook(UINT message, WPARAM wParam, LPARAM lParam) override;
-		void CenterMousePosition();
-		POINT GetCursorPoint();
+		void windowProcedureHook(UINT message, WPARAM wParam, LPARAM lParam) override;
+		void centerMousePosition();
+		POINT getCursorPoint();
 
 	private:
 		HWND& m_hwnd;

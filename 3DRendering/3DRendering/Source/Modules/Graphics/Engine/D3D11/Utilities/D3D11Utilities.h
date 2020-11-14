@@ -1,5 +1,10 @@
 #pragma once
 #include <string>
+#include <memory>
+#include <DirectXTK/SimpleMath.h>
+
+#include "../Mesh/Mesh.h"
+#include "../Buffers/BufferService.h"
 
 enum class ShaderType
 {
@@ -14,5 +19,18 @@ enum class ShaderType
 
 namespace D3D11Utilities
 {
-	std::string loadShader(ShaderType type, std::string fileName);
+	struct CBufferAlwaysChanging
+	{
+		DirectX::SimpleMath::Matrix worldMatrix;
+		DirectX::SimpleMath::Matrix viewMatrix;
+	};
+
+	struct CBufferSometimesChanging
+	{
+		DirectX::SimpleMath::Matrix projectionMatrix;
+	};
+
+	std::string loadShader(std::string fileName);
+
+	//std::shared_ptr<Mesh> loadMesh(const std::string& filePath, const std::string& meshID);
 };

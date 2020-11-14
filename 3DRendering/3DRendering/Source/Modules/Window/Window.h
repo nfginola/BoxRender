@@ -8,6 +8,8 @@
 #include <assert.h>
 #include <memory>
 
+
+
 class Window
 {
 protected:

@@ -14,18 +14,18 @@ namespace Input
 		DXTKKeyboard();
 		~DXTKKeyboard();
 
-		bool IsKeyPressed(const std::string& key) override;
-		bool IsKeyDown(const std::string& key) override;
-		void Update() override;
+		bool isKeyPressed(const std::string& key) override;
+		bool isKeyDown(const std::string& key) override;
+		void update() override;
 
 	private:
-		void WindowProcedureHook(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
+		void windowProcedureHook(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 		std::shared_ptr<DirectX::Keyboard> m_keyboard;
 		DirectX::Keyboard::State m_kbState;
 		DirectX::Keyboard::KeyboardStateTracker m_kbStateTracker;
 
-		void UpdateState();
+		void updateState();
 
 
 	};
