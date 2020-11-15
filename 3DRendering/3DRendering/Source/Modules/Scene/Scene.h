@@ -15,6 +15,7 @@ protected:
 	std::vector<std::shared_ptr<Model>> m_models;
 	std::vector<std::shared_ptr<Camera>> m_cameras;
 	std::vector<std::shared_ptr<Mesh>> m_meshes;
+	std::vector<std::shared_ptr<DirectX::BoundingOrientedBox>> m_boundingBoxes;
 
 	std::shared_ptr<Input::InputEngine> m_input;
 
@@ -32,6 +33,7 @@ public:
 
 	const std::vector<std::shared_ptr<Camera>>& getCameras();
 	const std::vector<std::shared_ptr<Mesh>>& getMeshes();
+	const std::vector<std::shared_ptr<DirectX::BoundingOrientedBox>> getBoundingBoxes();
 
 };
 

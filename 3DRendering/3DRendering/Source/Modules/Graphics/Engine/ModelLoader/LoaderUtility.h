@@ -7,6 +7,6 @@
 
 namespace ModelLoader
 {
-	std::shared_ptr<Mesh> loadMesh(const std::string& filePath, const std::string& meshID, DirectX::BoundingBox& aabb);
+	std::shared_ptr<Mesh> loadMesh(const std::string& filePath, const std::string& meshID, DirectX::BoundingOrientedBox& boundingBox);
 }
 

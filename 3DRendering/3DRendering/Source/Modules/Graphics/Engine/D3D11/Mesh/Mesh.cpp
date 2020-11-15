@@ -27,9 +27,11 @@ void Mesh::setWorldMatrix(DirectX::SimpleMath::Vector3 pos, DirectX::SimpleMath:
 	//m_worldMatrix *= DirectX::XMMatrixRotationY(rot.y);
 	//m_worldMatrix *= DirectX::XMMatrixRotationZ(rot.z);
 
-	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationX(rot.x);
-	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationY(rot.y);
-	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationZ(rot.z);
+	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateFromYawPitchRoll(rot.y, rot.x, rot.z);		// Same??
+
+	//m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationX(rot.x);
+	//m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationY(rot.y);
+	//m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateRotationZ(rot.z);
 
 	m_worldMatrix *= DirectX::SimpleMath::Matrix::CreateTranslation(pos);
 

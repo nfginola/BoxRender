@@ -11,16 +11,21 @@ DefaultScene::DefaultScene(std::shared_ptr<Player> player, std::shared_ptr<Input
 	// Init scene
 	std::shared_ptr<Model> nanosuit = Scene::createModel("Models\\nanosuit\\nanosuit.obj", "testModel");
 	std::shared_ptr<Model> nanosuit2 = Scene::createModel("Models\\nanosuit\\nanosuit.obj", "testModel");
-	std::shared_ptr<Model> sponza = Scene::createModel("Models\\Sponza\\Sponza.fbx", "sponza");
+	//std::shared_ptr<Model> sponza = Scene::createModel("Models\\Sponza\\Sponza.fbx", "sponza");
 
-	nanosuit->setPosition(Vector3(5.f, 0.f, 0.f));
-	//nanosuit->setRotation(Vector3(0.f, M_PI / 2.f, 0.f));
+	// Offset the bounding box if needed
+	nanosuit->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
+	nanosuit2->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
+
+	nanosuit->setPosition(Vector3(5.f, 0.f, -0.1f));
+	nanosuit->setRotation(Vector3(0.f, M_PI / 4.f, 0.f));
+	nanosuit2->setPosition(Vector3(1.f, 0.f, 0.f));
 
 	nanosuit2->setScale(0.3f);
 
 	nanosuit->setScale(0.3f);
 
-	sponza->setScale(0.03f);
+	//sponza->setScale(0.03f);
 
 }
 
@@ -45,16 +50,16 @@ void DefaultScene::update(float dt)
 
 	if (m_input->getKeyboard()->isKeyPressed("X"))
 	{
-		m_models[1]->setPosition(m_models[1]->getPosition() + Vector3(0.5f, 0.f, 0.f));
+		m_models[1]->setPosition(m_models[1]->getPosition() + Vector3(0.1f, 0.f, 0.f));
 	}
 
-	std::wstring x = std::to_wstring(m_models[1]->getAABB().Center.x + m_models[1]->getAABB().Extents.x);
-	std::wstring y = std::to_wstring(m_models[1]->getAABB().Center.y + m_models[1]->getAABB().Extents.y);
-	std::wstring z = std::to_wstring(m_models[1]->getAABB().Center.z + m_models[1]->getAABB().Extents.z);
+	std::wstring x = std::to_wstring(m_models[1]->getBoundingBox()->Center.x + m_models[1]->getBoundingBox()->Extents.x);
+	std::wstring y = std::to_wstring(m_models[1]->getBoundingBox()->Center.y + m_models[1]->getBoundingBox()->Extents.y);
+	std::wstring z = std::to_wstring(m_models[1]->getBoundingBox()->Center.z + m_models[1]->getBoundingBox()->Extents.z);
 	std::wstring info = L"x: " + x + L" | y: " + y + L" | z: " + z + L"\n";
 	OutputDebugStringW(info.c_str());
 
-	if (m_models[0]->getAABB().Intersects(m_models[1]->getAABB()))
+	if (m_models[0]->getBoundingBox()->Intersects(*m_models[1]->getBoundingBox().get()))
 	{
 		m_models[0]->getMesh()->setRenderMode(false);
 		OutputDebugStringW(L"Collided!\n");

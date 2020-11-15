@@ -1,6 +1,6 @@
 #include "LoaderUtility.h"
 
-std::shared_ptr<Mesh> ModelLoader::loadMesh(const std::string& filePath, const std::string& meshID, DirectX::BoundingBox& aabb)
+std::shared_ptr<Mesh> ModelLoader::loadMesh(const std::string& filePath, const std::string& meshID, DirectX::BoundingOrientedBox& boundingBox)
 {
 	std::filesystem::path fpath(filePath);
 	std::string modelName = fpath.stem().string();
@@ -37,7 +37,20 @@ std::shared_ptr<Mesh> ModelLoader::loadMesh(const std::string& filePath, const s
 		positions.push_back(DirectX::XMFLOAT3(vertex.m_position.x, vertex.m_position.y, vertex.m_position.z));
 	}
 
+	// For some reason, if initialized directly with BoundingOrientedBox, gives wrong extents!
+	DirectX::BoundingBox aabb;
 	DirectX::BoundingBox::CreateFromPoints(aabb, positions.size(), positions.data(), sizeof(DirectX::XMFLOAT3));
+
+	boundingBox.CreateFromBoundingBox(boundingBox, aabb);
+
+	// Fix orientation??
+	//float extentX = boundingBox.Extents.x;
+	//float extentY = boundingBox.Extents.y;
+	//float extentZ = boundingBox.Extents.z;
+
+	//boundingBox.Extents.y = extentZ;
+	//boundingBox.Extents.z = extentX;
+	//boundingBox.Extents.x = extentZ;
 
 	// Convert to mesh subset
 	std::vector<Mesh::Subset> subsets;

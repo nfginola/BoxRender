@@ -2,12 +2,16 @@
 
 std::shared_ptr<Model> Scene::createModel(const std::string& fileName, const std::string& meshID)
 {
-	DirectX::BoundingBox aabb;
 
-	std::shared_ptr<Mesh> mesh = ModelLoader::loadMesh(fileName, meshID, aabb);
+	DirectX::BoundingOrientedBox boundingBox;
+
+	std::shared_ptr<Mesh> mesh = ModelLoader::loadMesh(fileName, meshID, boundingBox);
 	m_meshes.push_back(mesh);
 
-	std::shared_ptr<Model> model = std::make_shared<Model>(mesh, aabb);
+	std::shared_ptr<DirectX::BoundingOrientedBox> aabbToPush = std::make_shared<DirectX::BoundingOrientedBox>(boundingBox);
+	m_boundingBoxes.push_back(aabbToPush);
+
+	std::shared_ptr<Model> model = std::make_shared<Model>(mesh, aabbToPush);
 	m_models.push_back(model);
 	return model;
 }
@@ -50,4 +54,9 @@ const std::vector<std::shared_ptr<Camera>>& Scene::getCameras()
 const std::vector<std::shared_ptr<Mesh>>& Scene::getMeshes()
 {
 	return m_meshes;
+}
+
+const std::vector<std::shared_ptr<DirectX::BoundingOrientedBox>> Scene::getBoundingBoxes()
+{
+	return m_boundingBoxes;
 }

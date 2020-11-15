@@ -46,7 +46,9 @@ Graphics::D3D11Renderer::D3D11Renderer(const HWND& hwnd, const int& clientWidth,
 
 	struct aabbDat
 	{
+		DirectX::XMFLOAT4 center;
 		float x, y, z;
+		DirectX::XMMATRIX rotationMatrix;
 	};
 
 	testData myDat = { 1.f, 1.f, 0.f, 1.f };
@@ -150,6 +152,7 @@ void Graphics::D3D11Renderer::tempDraw(std::shared_ptr<Scene> scene)
 	BufferService& bufServ = BufferService::getInstance();
 	const std::vector<std::shared_ptr<Camera>>& cameras = scene->getCameras();
 	const std::vector<std::shared_ptr<Mesh>>& meshes = scene->getMeshes();
+	const std::vector<std::shared_ptr<DirectX::BoundingOrientedBox>>& boundingBoxes = scene->getBoundingBoxes();
 
 	devCon->ClearDepthStencilView(m_dsv.Get(), D3D11_CLEAR_DEPTH, 1.f, 0.f);
 	m_devMan->getDeviceContext()->OMSetRenderTargets(1, m_devMan->getRTV().GetAddressOf(), m_dsv.Get()); // have to continually set
@@ -179,11 +182,9 @@ void Graphics::D3D11Renderer::tempDraw(std::shared_ptr<Scene> scene)
 		shdServ.getShader("ps")->bindConstantBuffers(0, cbs, 1);
 
 		m_textureBatchDraw->draw(meshes, cameras[0]->getViewMatrix());
-
-
 	}
 
-	// Render line (IN PROGRESS)
+	// Render bounding box
 	{
 		m_devMan->getDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 		m_devMan->getDeviceContext()->IASetInputLayout(nullptr);
@@ -195,22 +196,31 @@ void Graphics::D3D11Renderer::tempDraw(std::shared_ptr<Scene> scene)
 				bufServ.getBuffer("sometimesChangingCB")->getBuffer(),
 				bufServ.getBuffer("aabbCB")->getBuffer() }, 3);
 
+
+
 		struct aabbDat
 		{
+			DirectX::XMFLOAT4 center;
 			float x, y, z;
+			DirectX::XMMATRIX rotationMatrix;
 		};
+		
+		for (std::size_t i = 0; i < boundingBoxes.size(); ++i)
+		{
+			// For each AABB -- Get them down here! (Do it in a separate function called from Graphics! e.g drawAABB)
+			D3D11Utilities::CBufferAlwaysChanging cbAC = { meshes[i]->getWorldMatrix(), cameras[0]->getViewMatrix() };
+			bufServ.getBuffer("alwaysChangingCB")->updateBufferMap(&cbAC, sizeof(cbAC), D3D11_MAP_WRITE_DISCARD);
 
-		// For each AABB -- Get them down here! (Do it in a separate function called from Graphics! e.g drawAABB)
-		//bufServ.getBuffer("aabbCB")->updateBufferMap()
-		m_devMan->getDeviceContext()->Draw(1, 0);
+			aabbDat dat = { DirectX::XMFLOAT4(boundingBoxes[i]->Center.x, boundingBoxes[i]->Center.y, boundingBoxes[i]->Center.z, 1.f), 
+							boundingBoxes[i]->Extents.x, boundingBoxes[i]->Extents.y, boundingBoxes[i]->Extents.z,
+							DirectX::SimpleMath::Matrix::CreateFromQuaternion(boundingBoxes[i]->Orientation)};
+			bufServ.getBuffer("aabbCB")->updateBufferMap(&dat, sizeof(dat), D3D11_MAP_WRITE_DISCARD);
+			m_devMan->getDeviceContext()->Draw(1, 0);
+		}
 
 		m_devConHelper->unbindShader(ShaderType::VERTEX_SHADER);
 		m_devConHelper->unbindShader(ShaderType::GEOMETRY_SHADER);
 		m_devConHelper->unbindShader(ShaderType::PIXEL_SHADER);
-
-
-
-
 
 	}
 
