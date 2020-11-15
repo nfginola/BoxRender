@@ -12,6 +12,16 @@ BufferService::~BufferService()
 	m_repo.clear();
 }
 
+bool Graphics::BufferService::doesBufferExist(const std::string& name)
+{
+	auto el = m_repo.find(name);
+	if (el == m_repo.end())
+	{
+		return false;
+	}
+	return true;
+}
+
 std::string Graphics::BufferService::createBuffer(BufferType type, CD3D11_BUFFER_DESC desc, void* initData, std::string name)
 {
 	auto el = m_repo.find(name);

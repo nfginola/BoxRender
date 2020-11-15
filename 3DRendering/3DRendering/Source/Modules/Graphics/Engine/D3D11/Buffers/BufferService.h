@@ -43,6 +43,7 @@ namespace Graphics
 		BufferService(const BufferService&) = delete;
 
 
+		bool doesBufferExist(const std::string& name);
 		std::string createBuffer(BufferType type, CD3D11_BUFFER_DESC desc, void* initData, std::string name);
 		std::shared_ptr<Buffer> getBuffer(std::string name);
 		void removeBuffer(std::string name);

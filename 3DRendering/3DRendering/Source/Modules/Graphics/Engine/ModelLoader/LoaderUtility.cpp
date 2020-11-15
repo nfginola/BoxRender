@@ -2,10 +2,6 @@
 
 std::shared_ptr<Mesh> ModelLoader::loadMesh(const std::string& filePath, const std::string& meshID, DirectX::BoundingOrientedBox& boundingBox)
 {
-	std::filesystem::path fpath(filePath);
-	std::string modelName = fpath.stem().string();
-	std::string fpathDir = fpath.parent_path().string() + std::string("\\");		// Get directory of where the file is
-
 	// Prepare services
 	std::unique_ptr<ModelLoader::IModelLoader> loader = std::make_unique<ModelLoader::AssimpModelLoader>();
 	Graphics::BufferService& bufService = Graphics::BufferService::getInstance();
@@ -13,6 +9,11 @@ std::shared_ptr<Mesh> ModelLoader::loadMesh(const std::string& filePath, const s
 
 	std::string vboID = meshID + "_VBO";
 	std::string iboID = meshID + "_IBO";
+
+
+	std::filesystem::path fpath(filePath);
+	std::string modelName = fpath.stem().string();
+	std::string fpathDir = fpath.parent_path().string() + std::string("\\");		// Get directory of where the file is
 
 	// Load mesh
 	ModelLoader::IModelLoader::EngineMeshData modelData = loader->loadStaticModel(filePath);

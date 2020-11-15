@@ -11,11 +11,24 @@ DefaultScene::DefaultScene(std::shared_ptr<Player> player, std::shared_ptr<Input
 	// Init scene
 	std::shared_ptr<Model> nanosuit = Scene::createModel("Models\\nanosuit\\nanosuit.obj", "testModel");
 	std::shared_ptr<Model> nanosuit2 = Scene::createModel("Models\\nanosuit\\nanosuit.obj", "testModel");
+	std::shared_ptr<Model> stall = Scene::createModel("Models\\Stall\\stall.obj", "stall");
 	//std::shared_ptr<Model> sponza = Scene::createModel("Models\\Sponza\\Sponza.fbx", "sponza");
+
+	for (int i = 0; i < 10; ++i)
+	{
+		std::shared_ptr<Model> nano = Scene::createModel("Models\\nanosuit\\nanosuit.obj", "testModel");
+		nano->setPosition(Vector3(i * 5.f, 0.f, 10.f));
+		nano->setScale(0.3f);
+		nano->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
+	}
 
 	// Offset the bounding box if needed
 	nanosuit->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
 	nanosuit2->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
+	stall->setBoundingBoxOffsets(Vector3(0.f, 2.55f, 1.22f));
+
+	stall->setPosition(Vector3(0.f, 0.f, 30.f));
+	stall->setRotation(Vector3(0.f, M_PI, 0.f));
 
 	nanosuit->setPosition(Vector3(5.f, 0.f, -0.1f));
 	nanosuit->setRotation(Vector3(0.f, M_PI / 4.f, 0.f));
