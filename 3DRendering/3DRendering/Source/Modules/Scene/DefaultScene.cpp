@@ -16,10 +16,14 @@ DefaultScene::DefaultScene(std::shared_ptr<Player> player, std::shared_ptr<Input
 
 	for (int i = 0; i < 10; ++i)
 	{
-		std::shared_ptr<Model> nano = Scene::createModel("Models\\nanosuit\\nanosuit.obj", "testModel");
-		nano->setPosition(Vector3(i * 5.f, 0.f, 10.f));
-		nano->setScale(0.3f);
-		nano->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
+		for (int x = 0; x < 10; ++x)
+		{
+			std::shared_ptr<Model> nano = Scene::createModel("Models\\nanosuit\\nanosuit.obj", "testModel");
+			nano->setPosition(Vector3(i * 5.f, 0.f, x * 5.f));
+			nano->setScale(0.3f);
+			nano->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
+		}
+
 	}
 
 	// Offset the bounding box if needed
@@ -27,7 +31,7 @@ DefaultScene::DefaultScene(std::shared_ptr<Player> player, std::shared_ptr<Input
 	nanosuit2->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
 	stall->setBoundingBoxOffsets(Vector3(0.f, 2.55f, 1.22f));
 
-	stall->setPosition(Vector3(0.f, 0.f, 30.f));
+	stall->setPosition(Vector3(0.f, 0.f, -30.f));
 	stall->setRotation(Vector3(0.f, M_PI, 0.f));
 
 	nanosuit->setPosition(Vector3(5.f, 0.f, -0.1f));
@@ -78,7 +82,7 @@ void DefaultScene::update(float dt)
 		OutputDebugStringW(L"Collided!\n");
 	}
 
-	m_player->update(dt);
+	m_player->update(0.03);
 	for (const auto& model : m_models)
 	{
 		model->update(dt);
