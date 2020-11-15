@@ -9,6 +9,7 @@ private:
 	std::shared_ptr<DirectX::BoundingOrientedBox> m_boundingBox;
 
 	DirectX::SimpleMath::Vector3 m_boundingBoxOffsets;
+	DirectX::SimpleMath::Vector3 m_boundingBoxOffsetsRotated;
 
 public:
 	Model(std::shared_ptr<Mesh> mesh, std::shared_ptr<DirectX::BoundingOrientedBox> boundingBox);
