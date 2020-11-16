@@ -8,7 +8,7 @@ static const float4 CUBE[3] =
 
 cbuffer testData : register(b0)
 {
-    float a;
+    float a;    
     float b;
     float c;
     float d;

@@ -85,21 +85,25 @@ void main(point float4 input[1] : POSITION, inout LineStream< GSOutput > output)
         if (i == 4)
             output.RestartStrip();
     }
+
     
     output.RestartStrip();
     
-    
     // vertical lines
-    for (uint a = 0; a < 9; ++a)
+    for (uint a = 0; a < 8; ++a)
     {
-        float4 csPos = mul(g_projectionMatrix, mul(g_viewMatrix, wsPositions[a+10]));
+        float4 csPos = mul(g_projectionMatrix, mul(g_viewMatrix, wsPositions[a + 10]));
         
         GSOutput element;
         element.pos = csPos;
         output.Append(element);
         
-        //if (a % 2 == 0)
-        //    output.RestartStrip();
+        if ((a + 1) % 2 == 0 && a != 0)
+        {
+            output.RestartStrip();
+
+        }
+    
     }
 
 }

@@ -78,18 +78,6 @@ Graphics::D3D11Renderer::D3D11Renderer(const HWND& hwnd, const int& clientWidth,
 		nullptr, "aabbCB"
 	);
 
-	//m_devMan->getDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	//m_devMan->getDeviceContext()->RSSetViewports(1, &m_devMan->getVP());
-
-	//std::vector<Microsoft::WRL::ComPtr<ID3D11Buffer>> cbs = 
-	//{	bufServ.getBuffer("testCB")->getBuffer(), 
-	//	bufServ.getBuffer("alwaysChangingCB")->getBuffer(),
-	//	bufServ.getBuffer("sometimesChangingCB")->getBuffer() 
-	//};
-	//shdServ.getShader("vs")->bind();
-	//shdServ.getShader("ps")->bind();
-	//shdServ.getShader("vs")->bindConstantBuffers(0, cbs, cbs.size());
-	//shdServ.getShader("ps")->bindConstantBuffers(0, cbs, 1);
 
 	// Create depth stencil view (enable depth test)
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> dsvText;

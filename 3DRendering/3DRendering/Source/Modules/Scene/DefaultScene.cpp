@@ -46,11 +46,10 @@ DefaultScene::DefaultScene(std::shared_ptr<Player> player, std::shared_ptr<Input
 		}
 	}
 
-
 	// Offset the bounding box if needed
 	nanosuit->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
 	nanosuit2->setBoundingBoxOffsets(Vector3(0.f, 2.3f, 0.f));
-	stall->setBoundingBoxOffsets(Vector3(0.f, 2.55f, 0.f));
+	stall->setBoundingBoxOffsets(Vector3(-0.1f, 2.55f, -1.16f));
 
 	stall->setPosition(Vector3(0.f, 0.f, -10.f));
 
